@@ -106,8 +106,8 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
     
     // MARK: - UIPercentDrivenInteractiveTransition
     
-    private var interactionInProgress = false
-    private var shouldCompleteTransition = false
+    public var interactionInProgress = false
+    public var shouldCompleteTransition = false
     private var startPoint:CGPoint = CGPoint(x: 0.0, y: 0.0)
 
     public func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -163,10 +163,19 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
             }
             
         case .changed:
-            if (direction == .toRight && translation.x < startPoint.x) ||
+            if (
+                (!opened &&
+                ((direction == .toRight && translation.x < startPoint.x) ||
                 (direction == .toLeft && translation.x > startPoint.x) ||
                 (direction == .toTop && translation.y > startPoint.y) ||
-                (direction == .toBottom && translation.y < startPoint.y){
+                (direction == .toBottom && translation.y < startPoint.y)))
+                    ||
+                (opened &&
+                    ((direction == .toRight && translation.x > startPoint.x) ||
+                    (direction == .toLeft && translation.x < startPoint.x) ||
+                    (direction == .toTop && translation.y < startPoint.y) ||
+                    (direction == .toBottom && translation.y > startPoint.y)))
+                ) {
                 shouldCompleteTransition = false
                 gestureRecognizer.isEnabled = false
             }

@@ -156,7 +156,7 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
     
     open func setRoot(_ viewControllers: Array<UIViewController>, fromMenu: ByvMenu?) {
         if self.viewControllers != viewControllers {
-            if let menu = fromMenu, let transition:LeftMenuTransition = menu.transition() as? LeftMenuTransition {
+            if let menu = fromMenu, let transition:ByvMenuTransition = menu.transition() as? ByvMenuTransition {
                 transition.onWideOpen = {
                     self.viewControllers = viewControllers
                     if fromMenu != nil && fromMenu as? UIViewController == self.leftMenu as? UIViewController {
