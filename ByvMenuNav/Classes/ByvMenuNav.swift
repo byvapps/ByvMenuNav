@@ -73,6 +73,12 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
         }
     }
     
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let menu = self.leftMenu as? UIViewController {
+            menu.viewWillTransition(to:size, with:coordinator)
+        }
+    }
+    
     // MARK: - Static funcs
     
     public static func closeLeftMenu() {

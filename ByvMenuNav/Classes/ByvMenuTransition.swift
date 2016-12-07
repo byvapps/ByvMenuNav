@@ -11,6 +11,8 @@ import Foundation
 public enum ByvTransationDirection {
     case toLeft
     case toRight
+    case toTop
+    case toBottom
 }
 
 open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
@@ -25,10 +27,11 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
     public var direction:ByvTransationDirection = .toRight
     
     public var onWideOpen: (() -> Void)? = nil
+    public var startTransition: (() -> Void)? = nil
+    public var closeTransition: (() -> Void)? = nil
     
     public override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     public func rotated() {
@@ -133,9 +136,12 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
         
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
         var progress = (translation.x / UIScreen.main.bounds.size.width)
-        var dir:ByvTransationDirection = .toRight
-        if (direction == .toRight && opened) || (direction == .toLeft && !opened) {
-            dir = .toLeft
+        if direction == .toTop || direction == .toBottom {
+            progress = (translation.y / UIScreen.main.bounds.size.height)
+            if (direction == .toBottom && opened) || (direction == .toTop && !opened) {
+                progress *= -1
+            }
+        } else if (direction == .toRight && opened) || (direction == .toLeft && !opened) {
             progress *= -1
         }
         
@@ -147,13 +153,20 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
             startPoint = translation
             interactionInProgress = true
             if !opened {
-                startTransition()
+                if let action = self.startTransition {
+                    action()
+                }
             } else {
-                closeTransition()
+                if let action = self.closeTransition {
+                    action()
+                }
             }
             
         case .changed:
-            if (dir == .toRight && translation.x < startPoint.x) || (dir == .toLeft && translation.x > startPoint.x) {
+            if (direction == .toRight && translation.x < startPoint.x) ||
+                (direction == .toLeft && translation.x > startPoint.x) ||
+                (direction == .toTop && translation.y > startPoint.y) ||
+                (direction == .toBottom && translation.y < startPoint.y){
                 shouldCompleteTransition = false
                 gestureRecognizer.isEnabled = false
             }
@@ -179,9 +192,5 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
         }
     }
     
-    func startTransition() {
-    }
     
-    func closeTransition() {
-    }
 }

@@ -11,7 +11,7 @@ import ByvMenuNav
 
 class MenuTableViewController: UITableViewController, ByvMenu {
     
-    let _transition:ByvMenuTransition = LeftMenuTransition()
+    let _transition:BottomMenuTransition = BottomMenuTransition.init(direction: .toRight)
     let _statusBarStyle:UIStatusBarStyle = UIStatusBarStyle.lightContent
     let _barButtonItem:UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "menuButton") , style: .plain, target: nil, action: nil)
 
@@ -25,6 +25,12 @@ class MenuTableViewController: UITableViewController, ByvMenu {
         self.transitioningDelegate = _transition
         _transition.wireTo(viewController: ByvMenuNav.instance)
         _transition.newStatusBarStyle = _statusBarStyle
+        _transition.startTransition = {
+            ByvMenuNav.showLeftMenu()
+        }
+        _transition.closeTransition = {
+            ByvMenuNav.closeLeftMenu()
+        }
     }
     
     func barButton() -> UIBarButtonItem {
@@ -35,6 +41,18 @@ class MenuTableViewController: UITableViewController, ByvMenu {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            print("new size: \(size)")
+            print("bounds size: \(UIScreen.main.bounds)")
+        }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            print("rotation completed")
+            self._transition.setDirection(self._transition.direction)
+            self._transition.rotated()
+        })
+        
     }
     
     override func didReceiveMemoryWarning() {
