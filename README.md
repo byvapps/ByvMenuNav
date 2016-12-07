@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/ByvMenuNav.svg?style=flat)](http://cocoapods.org/pods/ByvMenuNav)
 [![Platform](https://img.shields.io/cocoapods/p/ByvMenuNav.svg?style=flat)](http://cocoapods.org/pods/ByvMenuNav)
 
+## ByvMenuNav
+Is an UINavigationController than manage menús. If the status bar style is going to be changed you must add `View controller-based status bar appearance = NO`to project plist
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
