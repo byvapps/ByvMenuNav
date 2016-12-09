@@ -6,7 +6,9 @@
 [![Platform](https://img.shields.io/cocoapods/p/ByvMenuNav.svg?style=flat)](http://cocoapods.org/pods/ByvMenuNav)
 
 ## ByvMenuNav
-Is an UINavigationController than manage menús. If the status bar style is going to be changed you must add `View controller-based status bar appearance = NO`to project plist
+
+Is an UINavigationController than manage menus. 
+If the status bar style is going to be changed you must add `View controller-based status bar appearance = NO`to project plist
 
 ## Example
 
@@ -23,9 +25,28 @@ it, simply add the following line to your Podfile:
 pod "ByvMenuNav"
 ```
 
+## Usage
+
+Set root `UINavigationController` class to `ByvMenuNav` class.
+
+Menu view must implement `ByvMenu` protocol. For default left menu you can assign it in three different ways. 
+
+**1.- From storyboard**
+Create an UIViewController with `StoryBoard ID` = `ByvLeftMenuVC`
+
+**2.- From storyboard with other StoryBoard ID**
+Dynamically update the custom StoryBoard Id `ByvMenuNav.instance.leftMenuIdentifier = "MyCustomByvLeftMenuVCStoryBoardId"`
+
+**3.- Updating leftMenu**
+Dynamically update the `leftMenu` var `ByvMenuNav.instance.leftMenu = myCustomByvLeftMenu`
+
+## Mode
+
+The menu button can be displayed only in the root view controller or in all view controllers setting  `allwaysShowLeftMenuButton = true`.
+
 ## Author
 
-Adrian Apodaca macbook air, adrian@byvapps.com
+Adrian Apodaca, adrian@byvapps.com
 
 ## License
 

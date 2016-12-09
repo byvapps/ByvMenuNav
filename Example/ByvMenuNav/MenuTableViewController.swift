@@ -8,6 +8,7 @@
 
 import UIKit
 import ByvMenuNav
+import ByvModalNav
 
 class MenuTableViewController: UITableViewController, ByvMenu {
     
@@ -23,7 +24,6 @@ class MenuTableViewController: UITableViewController, ByvMenu {
     
     func loadTransition() {
         self.transitioningDelegate = _transition
-        _transition.wireTo(viewController: ByvMenuNav.instance)
         _transition.newStatusBarStyle = _statusBarStyle
         _transition.startTransition = {
             ByvMenuNav.showLeftMenu()
@@ -64,13 +64,13 @@ class MenuTableViewController: UITableViewController, ByvMenu {
     
     
     @IBAction func showCloseModal(_ sender: Any) {
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "modalNavVC")
-        ByvMenuNav.instance?.showModal(vc, fromMenu: self)
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuSettingsVC")
+        ByvMenuNav.instance?.showModal(ByvModalNav.init(rootViewController: vc) , fromMenu: self)
         
     }
     
     @IBAction func changeToCloseAsRoot(_ sender: Any) {
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "modalVC")
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC")
         ByvMenuNav.setRoot(viewController:vc, fromMenu: self)
     }
     

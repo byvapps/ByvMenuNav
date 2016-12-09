@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'ByvMenuNav_Example' do
   pod 'ByvMenuNav', :path => '../'
+  pod 'ByvModalNav'
 
   target 'ByvMenuNav_Tests' do
     inherit! :search_paths

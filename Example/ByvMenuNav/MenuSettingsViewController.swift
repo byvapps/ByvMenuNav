@@ -61,19 +61,19 @@ class MenuSettingsViewController: UIViewController {
             dir = .toBottom
         }
         
-        ((ByvMenuNav.instance?.leftMenu?.transition()) as? BottomMenuTransition)?.setDirection(dir, presentSizePecent: CGFloat(presentSize.value / 100), presentScale: CGFloat(presentScale.value / 100), menuStartScale: CGFloat(menuScale.value / 100), menuStartTranslation: CGFloat(menuTranslation.value))
+        ((ByvMenuNav.instance?.leftMenu?.transition()) as? BottomMenuTransition)?.setDirection(dir, menuSizePercent: CGFloat(presentSize.value / 100), presentScale: CGFloat(presentScale.value / 100), menuStartScale: CGFloat(menuScale.value / 100), menuStartTranslation: CGFloat(menuTranslation.value))
     }
     
     @IBAction func reset(_ sender: Any) {
         direction.selectedSegmentIndex = 0
-        presentSize.value = 10
-        presentSizeLbl.text = "10 %"
+        presentSize.value = 90
+        presentSizeLbl.text = "90 %"
         presentScale.value = 90
         presentScaleLbl.text = "90 %"
-        menuScale.value = 90
-        menuScaleLbl.text = "90 %"
-        menuTranslation.value = 100
-        menuTranslationLbl.text = "100 px"
+        menuScale.value = 100
+        menuScaleLbl.text = "100 %"
+        menuTranslation.value = 0
+        menuTranslationLbl.text = "0 px"
         update(self)
     }
 

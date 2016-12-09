@@ -52,6 +52,7 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
         if let leftMenu = leftMenu {
             if navigationController.viewControllers.index(of: viewController) == 0 || allwaysShowLeftMenuButton {
                 addLeftMenuButtonTo(viewController)
+                leftMenu.transition().wireTo(viewController: viewController)
             }
         }
     }

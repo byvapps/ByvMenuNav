@@ -24,19 +24,19 @@ open class BottomMenuTransition: ByvMenuTransition {
     private var menuV:UIView? = nil
     
     public init(direction: ByvTransationDirection,
-                presentSizePecent:CGFloat = 0.10,
+                menuSizePercent:CGFloat = 0.9,
                 presentScale:CGFloat = 0.9,
-                menuStartScale:CGFloat = 0.9,
-                menuStartTranslation:CGFloat = 100) {
+                menuStartScale:CGFloat = 1.0,
+                menuStartTranslation:CGFloat = 0) {
         super.init()
-        setDirection(direction, presentSizePecent: presentSizePecent, presentScale: presentScale, menuStartScale: menuStartScale, menuStartTranslation: menuStartTranslation)
+        setDirection(direction, menuSizePercent: menuSizePercent, presentScale: presentScale, menuStartScale: menuStartScale, menuStartTranslation: menuStartTranslation)
     }
     
     public func setDirection(_ dir: ByvTransationDirection,
-                                    presentSizePecent:CGFloat = 0.10,
+                                    menuSizePercent:CGFloat = 0.9,
                                     presentScale:CGFloat = 0.9,
-                                    menuStartScale:CGFloat = 0.9,
-                                    menuStartTranslation:CGFloat = 100) {
+                                    menuStartScale:CGFloat = 1.0,
+                                    menuStartTranslation:CGFloat = 0) {
         self.menuEndFrame = UIScreen.main.bounds
         self.menuWideFrame = UIScreen.main.bounds
         self.presentStartFrame = UIScreen.main.bounds
@@ -69,7 +69,7 @@ open class BottomMenuTransition: ByvMenuTransition {
         frame.origin.y = (UIScreen.main.bounds.size.height - frame.size.height) / 2.0
         frame.origin.x = (UIScreen.main.bounds.size.width - frame.size.width) / 2.0
         
-        let size:CGFloat = (UIScreen.main.bounds.size.width * presentSizePecent)
+        let size:CGFloat = (UIScreen.main.bounds.size.width * (1.0 - menuSizePercent))
         
         if dir == .toRight {
             frame.origin.x = UIScreen.main.bounds.size.width - size
