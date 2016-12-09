@@ -66,8 +66,7 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
     
     public func showMenu(_ transitionContext: UIViewControllerContextTransitioning) {
         //override me!!!
-        guard let _vc = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let menuVc = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
+        guard let menuVc = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
                 return
         }
         

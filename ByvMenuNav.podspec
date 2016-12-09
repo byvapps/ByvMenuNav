@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
     #   * Finally, don't worry about the indent, CocoaPods strips it!
 
     s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Is an UINavigationController than manage menus. It add lft menu button automatically
                        DESC
 
     s.homepage         = 'https://github.com/byvapps/ByvMenuNav'
@@ -31,4 +31,5 @@ TODO: Add long description of the pod here.
     s.ios.deployment_target = '8.0'
 
     s.source_files = 'ByvMenuNav/Classes/**/*'
+    s.requires_arc = true
 end
