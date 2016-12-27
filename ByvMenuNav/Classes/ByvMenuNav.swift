@@ -38,7 +38,7 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
         }
         set {
             _leftMenuIdentifier = newValue
-            if let menu:ByvMenu = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: _leftMenuIdentifier) as? ByvMenu {
+            if let menu:ByvMenu = self.storyboard?.instantiateViewController(withIdentifier: _leftMenuIdentifier) as? ByvMenu {
                 leftMenu = menu
             }
         }
