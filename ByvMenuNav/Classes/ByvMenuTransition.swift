@@ -127,8 +127,10 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
     }
     
     func prepareGestureRecognizerIn(view: UIView) {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(gestureRecognizer:)))
-        view.addGestureRecognizer(gesture)
+        if !view.isKind(of: UIScrollView.self) {
+            let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(gestureRecognizer:)))
+            view.addGestureRecognizer(gesture)
+        }
     }
     
     func handleGesture(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {

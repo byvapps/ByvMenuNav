@@ -44,6 +44,11 @@ Dynamically update the `leftMenu` var `ByvMenuNav.instance.leftMenu = myCustomBy
 
 The menu button can be displayed only in the root view controller or in all view controllers setting  `allwaysShowLeftMenuButton = true`.
 
+The root controller will add a pan gesture to display the menu
+    `addPanGesture = true`.
+
+Be carefull if the root view controller is an UITableViewController or any controller with a UIScrollView as root view. In this case pan gesture isn't added to allow scrolling... It can be added if you add the UIScrollView as a subview 
+
 ## Author
 
 Adrian Apodaca, adrian@byvapps.com

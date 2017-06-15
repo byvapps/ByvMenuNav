@@ -45,6 +45,7 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
     }
     
     public var allwaysShowLeftMenuButton = false
+    public var addPanGesture = true
     
     // MARK: - UINavigationControllerDelegate protocol
     
@@ -52,7 +53,9 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
         if let leftMenu = leftMenu {
             if navigationController.viewControllers.index(of: viewController) == 0 || allwaysShowLeftMenuButton {
                 addLeftMenuButtonTo(viewController)
-                leftMenu.transition().wireTo(viewController: viewController)
+                if addPanGesture {
+                    leftMenu.transition().wireTo(viewController: viewController)
+                }
             }
         }
     }
