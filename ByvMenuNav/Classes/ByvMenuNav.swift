@@ -17,6 +17,8 @@ public protocol ByvMenu : NSObjectProtocol {
 open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
     
     // MARK: - Vars
+    static public let notiWillShowMenu = Notification.Name("ByvMenuNavWillShowMenu")
+    static public let notiWillChangeSection = Notification.Name("ByvMenuNavWillChangeSection")
     
     static open var instance:ByvMenuNav? = nil
     
@@ -135,12 +137,14 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
     func showLeftMenu() {
         if let vc = leftMenu as? UIViewController {
             self.present(vc, animated: true, completion: nil)
+            NotificationCenter.default.post(name: ByvMenuNav.notiWillShowMenu, object: nil)
         }
     }
     
     func showMenu(_ menu:ByvMenu) {
         if let vc = menu as? UIViewController {
             self.present(vc, animated: true, completion: nil)
+            NotificationCenter.default.post(name: ByvMenuNav.notiWillShowMenu, object: nil)
         }
     }
     
@@ -165,12 +169,14 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
                     self.viewControllers = viewControllers
                     if fromMenu != nil && fromMenu as? UIViewController == self.leftMenu as? UIViewController {
                         self.addLeftMenuButtonTo(self.viewControllers[0])
+                        NotificationCenter.default.post(name: ByvMenuNav.notiWillChangeSection, object: nil)
                     }
                 }
             } else {
                 self.viewControllers = viewControllers
                 if fromMenu != nil && fromMenu as? UIViewController == self.leftMenu as? UIViewController {
                     self.addLeftMenuButtonTo(self.viewControllers[0])
+                    NotificationCenter.default.post(name: ByvMenuNav.notiWillChangeSection, object: nil)
                 }
             }
         }
