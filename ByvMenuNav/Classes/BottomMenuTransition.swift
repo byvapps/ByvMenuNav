@@ -227,7 +227,7 @@ open class BottomMenuTransition: ByvMenuTransition {
         })
     }
     
-    func tappedOut(_ sender: Any) {
+    @objc func tappedOut(_ sender: Any) {
         if let action = self.closeTransition {
             action()
         }

@@ -134,7 +134,7 @@ open class ByvMenuNav: UINavigationController, UINavigationControllerDelegate {
         }
     }
     
-    func showLeftMenu() {
+    @objc func showLeftMenu() {
         if let vc = leftMenu as? UIViewController {
             self.present(vc, animated: true, completion: nil)
             NotificationCenter.default.post(name: ByvMenuNav.notiWillShowMenu, object: nil)

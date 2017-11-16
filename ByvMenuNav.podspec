@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'ByvMenuNav'
-    s.version          = '1.0.3'
+    s.version          = '1.0.4'
     s.summary          = 'Is an UINavigationController than manage menus.'
 
     # This description is used to generate tags and improve search results.
@@ -29,6 +29,7 @@ Is an UINavigationController than manage menus. It add lft menu button automatic
     # s.social_media_url = 'https://twitter.com/byvapps'
 
     s.ios.deployment_target = '8.0'
+    s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 
     s.source_files = 'ByvMenuNav/Classes/**/*'
     s.requires_arc = true

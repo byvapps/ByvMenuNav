@@ -133,7 +133,7 @@ open class ByvMenuTransition: UIPercentDrivenInteractiveTransition, UIViewContro
         }
     }
     
-    func handleGesture(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+    @objc func handleGesture(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
         var progress = (translation.x / UIScreen.main.bounds.size.width)
